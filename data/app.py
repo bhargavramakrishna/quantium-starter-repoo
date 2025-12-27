@@ -1,13 +1,15 @@
-import pandas as pd
 from pathlib import Path
+import pandas as pd
 
 import dash
 from dash import dcc, html, Input, Output
 import plotly.express as px
 
-DATA_PATH = Path("output/final_output.csv")
+BASE_DIR = Path(__file__).resolve().parent  # Gets the 'data' directory
+DATA_PATH = BASE_DIR / "output" / "final_output.csv"
 PRICE_INCREASE_DATE = pd.to_datetime("2021-01-15")
 
+app = dash.Dash(__name__)
 # Load once at startup
 df = pd.read_csv(DATA_PATH)
 df["Date"] = pd.to_datetime(df["Date"])
